@@ -2,6 +2,9 @@ import React, { useMemo, useState } from "react";
 
 import { Post } from "./Post";
 import { Header } from "./Header";
+import { Button } from "./Button";
+
+import { ThemeProvider } from "./ThemeContext";
 
 export function App() {
   const [posts, setPosts] = useState([]);
@@ -22,7 +25,7 @@ export function App() {
           id,
           title: "Title" + id,
           subtitle: "Subtitle",
-          likes: 40,
+          likes: +id.toString().slice(-2),
           read: false,
         },
       ]);
@@ -52,14 +55,14 @@ export function App() {
   }
 
   return (
-    <React.Fragment>
+    <ThemeProvider>
       <Header>
         <h2>
-          Posts da semana <button onClick={handleAddPost}>Atualizar</button>
+          Posts da semana <Button onClick={handleAddPost}>Atualizar</Button>
           <br />
-          <button onClick={toggleFilterUnread}>
+          <Button onClick={toggleFilterUnread}>
             {!hasUnreadFilter ? "Filtrar não lidos" : "Remover filtro"}
-          </button>
+          </Button>
         </h2>
       </Header>
 
@@ -75,6 +78,6 @@ export function App() {
             onRead={handleReadPost}
           />
         ))}
-    </React.Fragment>
+    </ThemeProvider>
   );
 }
