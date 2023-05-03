@@ -6,6 +6,8 @@ import { Button } from "./Button";
 
 import { ThemeProvider } from "./ThemeContext";
 
+import styles from "./App.css";
+
 export function App() {
   const [posts, setPosts] = useState([]);
   const [hasUnreadFilter, setHasUnreadFilter] = useState(false);
@@ -25,7 +27,7 @@ export function App() {
           id,
           title: "Title" + id,
           subtitle: "Subtitle",
-          likes: +id.toString().slice(-2),
+          likes: +id.toString().slice(-4, -2),
           read: false,
         },
       ]);
@@ -57,7 +59,7 @@ export function App() {
   return (
     <ThemeProvider>
       <Header>
-        <h2>
+        <h2 className={styles.title}>
           Posts da semana <Button onClick={handleAddPost}>Atualizar</Button>
           <br />
           <Button onClick={toggleFilterUnread}>
