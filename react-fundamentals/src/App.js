@@ -6,7 +6,7 @@ import { Button } from "./Button";
 
 import { ThemeProvider } from "./ThemeContext";
 
-import styles from "./App.css";
+import styles from "./App.scss";
 
 export function App() {
   const [posts, setPosts] = useState([]);
@@ -29,6 +29,7 @@ export function App() {
           subtitle: "Subtitle",
           likes: +id.toString().slice(-4, -2),
           read: false,
+          removed: false,
         },
       ]);
     }, 100);
@@ -38,7 +39,7 @@ export function App() {
     setPosts((previousState) => {
       const newState = [...previousState];
       const postIndex = newState.findIndex((post) => post.id === id);
-      newState.splice(postIndex, 1);
+      newState[postIndex].removed = true;
       return newState;
     });
   }
