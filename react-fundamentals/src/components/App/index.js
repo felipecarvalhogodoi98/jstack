@@ -1,12 +1,11 @@
 import React, { useMemo, useState } from "react";
 
-import { Post } from "./Post";
-import { Header } from "./Header";
-import { Button } from "./Button";
+import { Post } from "../Post/";
+import { Header } from "../Header";
+import { Button } from "../Button";
 
-import { ThemeProvider } from "./ThemeContext";
-
-import styles from "./App.scss";
+import { ThemeProvider } from "../../context/ThemeContext";
+import { Title } from "./styles";
 
 export function App() {
   const [posts, setPosts] = useState([]);
@@ -39,7 +38,7 @@ export function App() {
     setPosts((previousState) => {
       const newState = [...previousState];
       const postIndex = newState.findIndex((post) => post.id === id);
-      newState[postIndex].removed = true;
+      newState[postIndex].removed = !newState[postIndex].removed;
       return newState;
     });
   }
@@ -60,13 +59,13 @@ export function App() {
   return (
     <ThemeProvider>
       <Header>
-        <h2 className={styles.title}>
+        <Title as="h2">
           Posts da semana <Button onClick={handleAddPost}>Atualizar</Button>
           <br />
           <Button onClick={toggleFilterUnread}>
             {!hasUnreadFilter ? "Filtrar não lidos" : "Remover filtro"}
           </Button>
-        </h2>
+        </Title>
       </Header>
 
       <hr />

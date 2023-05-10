@@ -1,15 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { PostHeader } from "./PostHeader";
-import { Button } from "./Button";
+import { Button } from "../Button";
 
-import styles from "./Post.scss";
+import { Post as PostStyles, Subtitle, Rate } from "./styles";
 
 export function Post({ post, onRemove, onRead }) {
-  console.log(styles);
   return (
     <>
-      <article className={`${styles.post} ${post.removed && styles.deleted}`}>
+      <PostStyles deleted={post.removed}>
         <PostHeader
           post={{
             id: post.id,
@@ -18,15 +17,15 @@ export function Post({ post, onRemove, onRead }) {
           }}
           onRemove={onRemove}
         />
-        <br />
-        <small>{post.subtitle}</small>
-        <br />
-        Likes: {post.likes}
-        <br />
+
+        <Subtitle>{post.subtitle}</Subtitle>
+
+        <Rate>Media: {post.likes}</Rate>
+
         {!post.read && (
           <Button onClick={() => onRead(post.id)}>Marcar como lido</Button>
         )}
-      </article>
+      </PostStyles>
     </>
   );
 }
